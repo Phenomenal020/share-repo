@@ -1,0 +1,148 @@
+body {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+}
+
+/* Aspapay button */
+#continueButton {
+  background-color: #4285f4;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#continueButton:hover {
+  background-color: #3075e9;
+}
+
+#continueButton:active {
+  background-color: #276bdc;
+}
+
+/* Modify the existing CSS code for the modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.67);
+}
+
+.modal-content {
+  background-color: #f4f4f4;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 20px; */
+}
+
+.modal-header h2 {
+  color: #2e2e40;
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #888;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payment-option {
+  background-color: #4285f4;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.payment-option:hover {
+  background-color: #3075e9;
+}
+
+.payment-option:active {
+  background-color: #276bdc;
+}
+
+/* Hide pay with card form */
+.hidden {
+  display: none;
+}
+
+.form-row {
+  margin-bottom: 10px;
+  gap: 10px;
+  display: flex;
+}
+
+#cardForm {
+  margin-top: 20px;
+}
+
+#cardNumber,
+#expiryDate,
+#cvv {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#continuePaymentBtn {
+  background-color: #4285f4;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 8px auto;
+}
+
+#continuePaymentBtn:hover {
+  background-color: #3075e9;
+}
+
+#continuePaymentBtn:active {
+  background-color: #276bdc;
+}
+
+/* Add this CSS code to hide the "Pay with USSD" button */
+#payWithUSSDBtn {
+  display: block;
+}
+
+#cardForm.active #payWithUSSDBtn {
+  display: none;
+}

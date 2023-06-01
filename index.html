@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <button id="continueButton">Continue with AspaPay</button>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>User Balance: ₦50</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <button class="payment-option" id="payWithCardBtn">
+            Pay with Card
+          </button>
+          <button class="payment-option" id="payWithUssd">Pay with USSD</button>
+
+          <form id="cardForm" class="hidden">
+            <div class="form-row">
+              <input
+                type="text"
+                id="cardNumber"
+                placeholder="Card Number"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <input
+                type="text"
+                id="expiryDate"
+                placeholder="Expiry Date (MM/YY)"
+                required
+              />
+              <input type="text" id="cvv" placeholder="CVV" required />
+            </div>
+            <div class="form-row">
+              <button type="submit" id="continuePaymentBtn">Continue</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
