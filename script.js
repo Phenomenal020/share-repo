@@ -1,92 +1,93 @@
 // Get the modal element
-const modal = document.getElementById("modal");
+const modal = document.getElementById("modal-container");
 
-// Get the button that opens the modal
-const continueButton = document.getElementById("continueButton");
-
-// Get the <span> element that closes the modal
+// close icon
 const closeBtn = document.getElementsByClassName("close")[0];
 
-// Get the button for "Pay with Card"
-const payWithCardBtn = document.getElementById("payWithCardBtn");
+// Get references to specific DOM elements
+const cardRowDiv = document.getElementsByClassName("card-row");
+const expiryDiv = document.getElementsByClassName("expiry-input")[0];
+const cardInputDiv = document.getElementsByClassName("card-input")[0];
+const expiryDateInput = document.getElementById("expiryDate"); // Get the expiry date input
+const cvvInput = document.getElementById("cvv"); // Get the cvv input
+const cardInput = document.getElementById("card-input"); // card number
+const nameOnCard = document.getElementById("nameOnCard"); // name on card
 
-// Get the button for "Pay with USSD"
-const payWithUssdBtn = document.getElementById("payWithUssd");
+let trackedInput = null;
+let trackedCardNumber = null;
 
-// Get the card payment form
-const cardForm = document.getElementById("cardForm");
-
-// Get the expiry date input
-const expiryDateInput = document.getElementById("expiryDate");
-
-// Get the cvv input
-const cvvInput = document.getElementById("cvv");
-
-// Function to open the modal
-continueButton.addEventListener("click", () => {
-  modal.style.display = "block";
+// Show the modal on page load
+window.addEventListener("load", () => {
+  modal.classList.add("slide-down");
 });
 
-// Function to close the modal
+// Close the modal and go back when the close button is clicked
 closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-  payWithCardBtn.classList.remove("hidden");
-  payWithUssdBtn.classList.remove("hidden");
-  cardForm.classList.add("hidden");
+  modal.classList.remove("slide-down");
+  window.history.back();
 });
 
 // Close the modal when the user clicks anywhere outside of it
 window.addEventListener("click", (event) => {
   if (event.target === modal) {
-    modal.style.display = "none";
-    payWithCardBtn.classList.remove("hidden");
-    payWithUssdBtn.classList.remove("hidden");
-    cardForm.classList.add("hidden");
+    modal.classList.remove("slide-down");
   }
 });
 
-// Function to show the card payment form when "Pay with Card" is clicked
-payWithCardBtn.addEventListener("click", () => {
-  payWithCardBtn.classList.add("hidden");
-  cardForm.classList.add("active"); // Add the "active" class to the card form
-  cardForm.classList.remove("hidden");
-  payWithUssdBtn.classList.add("hidden"); // Hide the "Pay with USSD" button
+// Format the card number input by adding a space after every 4 digits
+cardInput.addEventListener("input", (event) => {
+  const input = event.target;
+  const inputValue = input.value.replace(/\s/g, "");
+  const formattedValue = inputValue.replace(/(\d{4})/g, "$1 ").trim();
+  input.value = formattedValue;
 });
 
-// Function to submit the form when "Continue" is clicked
-const continuePaymentBtn = document.getElementById("continuePaymentBtn");
-continuePaymentBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  // Handle form submission here
-});
-
-// expiry date input
-
-expiryDateInput.addEventListener("input", (event) => {
-  const input = event.target.value;
-  const sanitizedInput = input.replace(/[^\d/]/g, ""); // Remove any non-digit and non-slash characters
-  if (sanitizedInput.length >= 2 && sanitizedInput.length < 4) {
-    const formattedInput = formatExpiryDate(sanitizedInput);
-    expiryDateInput.value = formattedInput;
+// Process the card input by adding spaces after every 4 digits (Unused function)
+function processCardInput(input) {
+  let spaceCount = parseInt(input.length / 4);
+  let processedInput = input;
+  let start = 0;
+  for (let i = 1; i < spaceCount; i++) {
+    processedInput =
+      processCardInput.slice(start, i * 4) +
+      " " +
+      processCardInput.slice(i * 4);
+    start += 4;
   }
-  if (sanitizedInput.length > 4) {
-    // Limit input to 4 characters
-    const truncatedInput =
-      sanitizedInput.slice(0, 2) + "-" + sanitizedInput.slice(2, 4);
-    expiryDateInput.value = truncatedInput;
-  }
-});
-
-function formatExpiryDate(input) {
-  const formattedInput = input.slice(0, 2) + "-" + input.slice(2);
-  return formattedInput;
 }
 
-// handle cvv input
+// Handle the expiry date input
+expiryDateInput.addEventListener("input", (event) => {
+  const input = event.target.value;
+  const sanitizedInput = input.replace(/\D/g, "");
+  if (sanitizedInput.length < 2) {
+    trackedInput = sanitizedInput;
+    expiryDateInput.value = trackedInput;
+  } else if (sanitizedInput.length === 2) {
+    trackedInput = sanitizedInput.slice(0, 2) + "/";
+    expiryDateInput.value = trackedInput;
+  } else if (sanitizedInput.length === 4 || sanitizedInput.length > 4) {
+    trackedInput =
+      sanitizedInput.slice(0, 2) + "/" + sanitizedInput.slice(2, 4);
+    expiryDateInput.value = trackedInput;
+  }
+});
+
+// Handle the cvv input
 cvvInput.addEventListener("input", (event) => {
-    const cvv = event.target.value;
-    const sanitizedInput = cvv.replace(/[^\d/]/g, ""); // Remove any non-digit and non-slash characters
-    if(sanitizedInput.length >= 3) {
-        cvvInput.value = sanitizedInput.slice(0, 3);
-    }
-})
+  const cvv = event.target.value;
+  const sanitizedInput = cvv.replace(/\D/g, "");
+  cvvInput.value = sanitizedInput;
+  if (sanitizedInput.length >= 3) {
+    cvvInput.value = sanitizedInput.slice(0, 3);
+  }
+});
+
+// Focus and blur functions
+function addFocusBorder(parentElement) {
+  parentElement.classList.add("focused");
+}
+
+function removeFocusBorder(parentElement) {
+  parentElement.classList.remove("focused");
+}

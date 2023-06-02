@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,300&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="modal-container" id="modal-container">
+      <section class="modal-content">
+        <div class="modal-header">
+          <h2 class="logo">AspaPay</h2>
+          <p class="close">&times;</p>
+        </div>
+
+        <div class="summary">
+          <h4 class="summary-text">Summary:</h4>
+          <p class="email">Michael@gmail.com</p>
+          <p class="amount">₦5,000</p>
+        </div>
+
+        <div class="modal-body">
+          <p class="pay-with-text">Pay with:</p>
+          <div class="button-wrapper">
+            <button class="option-card active-card">card</button>
+            <button class="option-card">bank transfer</button>
+            <button class="option-card">USSD</button>
+          </div>
+
+          <div class="card-details">
+            <div class="card-row">
+              <label for="" class="card-label" id="nameOnCard"
+                >name on card</label
+              >
+              <input
+                type="text"
+                class="card-input"
+                placeholder="Michael J. Ross"
+                onfocus="addFocusBorder(this.parentNode)"
+                onblur="removeFocusBorder(this.parentNode)"
+              />
+            </div>
+            <!-- <p>name error</p> -->
+
+            <div class="card-row">
+              <label for="" class="card-label">card number</label>
+              <input
+                type="text"
+                class="card-input"
+                placeholder="0000 0000 0000 0000"
+                id="card-input"
+                onfocus="addFocusBorder(this.parentNode)"
+                onblur="removeFocusBorder(this.parentNode)"
+              />
+            </div>
+            <!-- <p>card number error</p> -->
+
+            <div class="card-row-last">
+              <div class="expiry-input">
+                <label for="" class="card-label">card expiry</label>
+                <input
+                  type="text"
+                  class="card-input"
+                  placeholder="08/25"
+                  id="expiryDate"
+                  onfocus="addFocusBorder(this.parentNode)"
+                  onblur="removeFocusBorder(this.parentNode)"
+                />
+                <!-- <p>card expiry error</p> -->
+              </div>
+              <div class="cvv-input">
+                <label for="" class="card-label">CVV</label>
+                <input
+                  type="text"
+                  class="card-input"
+                  placeholder="124"
+                  id="cvv"
+                  onfocus="addFocusBorder(this.parentNode)"
+                  onblur="removeFocusBorder(this.parentNode)"
+                />
+                <!-- <p>cvv error</p> -->
+              </div>
+            </div>
+
+            <div>
+              <button class="submit-button" type="submit">pay ₦5,000</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
