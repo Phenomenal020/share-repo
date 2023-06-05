@@ -4,20 +4,30 @@ const modal = document.getElementById("modal-container");
 // close icon
 const closeBtn = document.getElementsByClassName("close")[0];
 
+// continue to aspapay button
+const continueButton = document.getElementById("continueButton");
+
 // Get references to specific DOM elements
+// The container for each input
 const cardRowDiv = document.getElementsByClassName("card-row");
+// The expiry field container
 const expiryDiv = document.getElementsByClassName("expiry-input")[0];
+// The input field itself
 const cardInputDiv = document.getElementsByClassName("card-input")[0];
-const expiryDateInput = document.getElementById("expiryDate"); // Get the expiry date input
-const cvvInput = document.getElementById("cvv"); // Get the cvv input
-const cardInput = document.getElementById("card-input"); // card number
-const nameOnCard = document.getElementById("nameOnCard"); // name on card
+// Get the expiry date input
+const expiryDateInput = document.getElementById("expiryDate"); 
+// Get the cvv input
+const cvvInput = document.getElementById("cvv"); 
+// card number
+const cardInput = document.getElementById("card-input");
+ // name on card 
+const nameOnCard = document.getElementById("nameOnCard");
 
 let trackedInput = null;
 let trackedCardNumber = null;
 
 // Show the modal on page load
-window.addEventListener("load", () => {
+continueButton.addEventListener("click", () => {
   modal.classList.add("slide-down");
 });
 

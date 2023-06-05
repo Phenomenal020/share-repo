@@ -19,7 +19,7 @@ body {
   background-color: #20212c;
 }
 
-#continueButton a {
+#continueButton  {
   position: absolute;
   top: 50%;
   right: 45%;
